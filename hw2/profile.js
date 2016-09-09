@@ -2,6 +2,7 @@
  * Created by Jeffrey on 9/8/2016.
  */
 
+//arrays for later references of labels, idNames, titles, alerts, and so on
 var defaultLabels = ["Jeffrey Wang", "Jhw5@rice.edu", "123-123-1234", "77005", "poop", "poop"];
 var idNames = ["dName", "email", "phone", "zip", "password", "cPass"];
 var inputTitles = ["Display Name", "Email Address", "Phone Number", "Zip Code", "Password", "Confirm Password"];
@@ -12,7 +13,7 @@ var updateVals = ["dName", "email", "phone", "zip", "password"];
 
 function insertDiv (idName, idIndex) {
     //insert DIV tags into the body with attributes based on the idName
-    //also insert input box and labels
+    //insert input box and labels
     //assign type for input
     var div = document.createElement("DIV");
     div.id = idName;
@@ -35,7 +36,6 @@ function checkRegex (idName, titleIndex) {
 
     var boolean;
     if (idName != "password") {
-        //getting the input
         var input = document.getElementById(idName).getElementsByTagName("input")[0];
         boolean=inputRegex[titleIndex].test(input.value);
     } else {
@@ -43,7 +43,6 @@ function checkRegex (idName, titleIndex) {
         boolean = checkPassword();
     }
 
-    //if it doesn't pass, we alert the appropriate message
     if (boolean == false) {
         alert(defaultAlerts[titleIndex]);
         return false;
@@ -60,8 +59,7 @@ var changedFields = "";
 
 
 function checkPassword () {
-    //gets value inputed in password and confirm passwords
-    //sees if they are the same
+    //checks if password and confirmed password are the same
     var password = document.getElementById("password").getElementsByTagName("input")[0].value;
     var cPass = document.getElementById("cPass").getElementsByTagName("input")[0].value;
     return (password === cPass);
@@ -101,7 +99,7 @@ window.onload = function(){
     //for each id in idNames... we perform insertDiv on it
     idNames.forEach(insertDiv);
 
-    //when we click on submit of the button...
+    //when we click on submit of the button
     //we update the labels with the inputs and alerts the user what changed
     document.getElementById("submit").onclick = function(){
         updateVals.forEach(updateLabels);
